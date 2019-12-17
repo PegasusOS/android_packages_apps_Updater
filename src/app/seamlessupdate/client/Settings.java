@@ -21,6 +21,7 @@ public class Settings extends AppCompatActivity {
     private static final String KEY_BATTERY_NOT_LOW = "battery_not_low";
     private static final String KEY_IDLE_REBOOT = "idle_reboot";
     private static final String KEY_CHECK_FOR_UDPATES = "check_for_updates";
+    private static final String KEY_UPDATE_INTERVAL = "update_interval";
     static final String KEY_WAITING_FOR_REBOOT = "waiting_for_reboot";
 
     static SharedPreferences getPreferences(final Context context) {
@@ -46,6 +47,12 @@ public class Settings extends AppCompatActivity {
     static boolean getIdleReboot(final Context context) {
         boolean def = Boolean.valueOf(context.getString(R.string.idle_reboot_default));
         return getPreferences(context).getBoolean(KEY_IDLE_REBOOT, def);
+    }
+
+    static long getUpdateInterval(final Context context) {
+        String def = context.getString(R.string.update_interval_default);
+        String value = getPreferences(context).getString(KEY_UPDATE_INTERVAL, def);
+        return Long.valueOf(value);
     }
 
     @Override
@@ -99,7 +106,8 @@ public class Settings extends AppCompatActivity {
             Preference.OnPreferenceChangeListener changeListener = (preference, newValue) -> {
                 final int value = Integer.parseInt((String) newValue);
                 getPreferences(requireContext()).edit().putInt(KEY_NETWORK_TYPE, value).apply();
-                if (!getPreferences(requireContext()).getBoolean(KEY_WAITING_FOR_REBOOT, false)) {
+                if ((!getPreferences(requireContext()).getBoolean(KEY_WAITING_FOR_REBOOT, false))
+                    && (getUpdateInterval(requireContext()) > 0)) {
                     PeriodicJob.schedule(requireContext());
                 }
                 return true;
@@ -114,8 +122,10 @@ public class Settings extends AppCompatActivity {
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             switch (key) {
                 case KEY_CHANNEL:
+                case KEY_UPDATE_INTERVAL:
                 case KEY_BATTERY_NOT_LOW:
-                    if (!getPreferences(requireContext()).getBoolean(KEY_WAITING_FOR_REBOOT, false)) {
+                    if ((!getPreferences(requireContext()).getBoolean(KEY_WAITING_FOR_REBOOT, false))
+                        && (getUpdateInterval(requireContext()) > 0)) {
                         PeriodicJob.schedule(requireContext());
                     }
                     break;
@@ -133,6 +143,8 @@ public class Settings extends AppCompatActivity {
             getPreferenceManager().getSharedPreferences().registerOnSharedPreferenceChangeListener(this);
             final ListPreference networkType = (ListPreference) findPreference(KEY_NETWORK_TYPE);
             networkType.setValue(Integer.toString(getNetworkType(requireContext())));
+            final ListPreference updateInterval = (ListPreference) findPreference(KEY_UPDATE_INTERVAL);
+            updateInterval.setValue(Long.toString(getUpdateInterval(requireContext())));
         }
 
         @Override

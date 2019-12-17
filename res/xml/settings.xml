@@ -11,6 +11,13 @@
             app:entryValues="@array/channel_values"
             app:defaultValue="@string/channel_default" />
 
+    <ListPreference app:key="update_interval"
+            app:title="@string/update_interval_title"
+            app:useSimpleSummaryProvider="true"
+            app:entries="@array/update_interval_entries"
+            app:entryValues="@array/update_interval_values"
+            app:defaultValue="@string/update_interval_default" />
+
     <ListPreference app:key="network_type"
             app:persistent="false"
             app:title="@string/network_type_title"
