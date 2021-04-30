@@ -14,6 +14,9 @@ public class BootReceiver extends BroadcastReceiver {
             if (Settings.getUpdateInterval(context) > 0) {
                 PeriodicJob.schedule(context);
             }
+            if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
+                PeriodicJob.schedule(context, true);
+            }
         } else {
             context.getPackageManager().setApplicationEnabledSetting(context.getPackageName(),
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED, 0);
