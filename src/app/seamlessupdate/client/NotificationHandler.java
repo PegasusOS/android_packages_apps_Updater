@@ -65,6 +65,20 @@ public class NotificationHandler {
                 .build());
     }
 
+    void showUpdateNotification() {
+        final NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID,
+                context.getString(R.string.notification_channel), NotificationManager.IMPORTANCE_HIGH);
+        channel.enableLights(true);
+        channel.enableVibration(true);
+        notificationManager.createNotificationChannel(channel);
+        notificationManager.notify(NOTIFICATION_ID_REBOOT, new Notification.Builder(context, NOTIFICATION_CHANNEL_ID)
+                .setContentIntent(getPendingSettingsIntent())
+                .setContentTitle("New update available")
+                .setOngoing(false)
+                .setSmallIcon(R.drawable.ic_system_update_white_24dp)
+                .build());
+    }
+
     void showInstallNotification(int progress, int max) {
         String title = context.getString(R.string.notification_install_title);
         Notification.Builder builder = new Notification.Builder(context, NOTIFICATION_CHANNEL_ID_PROGRESS)
