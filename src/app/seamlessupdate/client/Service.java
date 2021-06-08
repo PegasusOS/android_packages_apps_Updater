@@ -39,7 +39,7 @@ public class Service extends IntentService {
     private static final int CONNECT_TIMEOUT = 60000;
     private static final int READ_TIMEOUT = 60000;
     private static final File CARE_MAP_PATH = new File("/data/ota_package/care_map.pb");
-    private static final File UPDATE_PATH = new File("/data/ota_package/update.zip");
+    static final File UPDATE_PATH = new File("/data/ota_package/update.zip");
     private static final String PREFERENCE_DOWNLOAD_FILE = "download_file";
     private static final int HTTP_RANGE_NOT_SATISFIABLE = 416;
 
@@ -48,6 +48,10 @@ public class Service extends IntentService {
 
     public Service() {
         super(TAG);
+    }
+
+    static boolean isAbUpdate() {
+        return SystemProperties.getBoolean("ro.build.ab_update", false);
     }
 
     @Override
@@ -156,14 +160,19 @@ public class Service extends IntentService {
             if (serialno != null) {
                 throw new GeneralSecurityException("serialno constraint not permitted");
             }
-            if (!"AB".equals(type)) {
-                throw new GeneralSecurityException("package is not an A/B update");
+            if ("AB".equals(type) != isAbUpdate()) {
+                throw new GeneralSecurityException("update type does not match device");
             }
             if (sourceIncremental != null && !sourceIncremental.equals(INCREMENTAL)) {
                 throw new GeneralSecurityException("source incremental mismatch");
             }
             if (sourceFingerprint != null && !sourceFingerprint.equals(FINGERPRINT)) {
                 throw new GeneralSecurityException("source fingerprint mismatch");
+            }
+
+            if (!isAbUpdate()) {
+                annoyUser();
+                return;
             }
 
             long payloadOffset = 0;
