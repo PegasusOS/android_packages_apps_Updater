@@ -32,6 +32,7 @@
     <string name="check_for_updates_title">Check for updates</string>
     <string name="check_for_updates_summary">Tap to check for updates as soon as possible</string>
     <string name="update_interval_title">Update check interval</string>
+    <string name="update_interval_never">Never</string>
     <string name="update_interval_4hour">4 hours</string>
     <string name="update_interval_1day">1 day</string>
     <string name="update_interval_1week">1 week</string>
