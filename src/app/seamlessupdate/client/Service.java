@@ -269,8 +269,8 @@ public class Service extends IntentService {
             final boolean streaming = SystemProperties.getBoolean("sys.update.streaming_test", false);
 
             final String streamingPrefix = streaming ? "-streaming" : "";
-            final String incrementalUpdate = DEVICE + streamingPrefix + "-incremental-" + INCREMENTAL + "-" + targetIncremental + ".zip";
-            final String fullUpdate = DEVICE + streamingPrefix + "-ota_update-" + targetIncremental + ".zip";
+            final String incrementalUpdate = metadata[5];
+            final String fullUpdate = metadata[4];
 
             if (incrementalUpdate.equals(downloadFile) || fullUpdate.equals(downloadFile)) {
                 Log.d(TAG, "resume fetch of " + downloadFile + " from " + downloaded + " bytes");
