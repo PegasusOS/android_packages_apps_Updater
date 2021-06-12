@@ -20,8 +20,8 @@ public final class Constants {
     private Constants() {
     }
 
-    public static final String SF_PROJECT_NAME = "crdroid";
-    public static final String SF_PROJECT_ROOT_PATH = "6.x";
+    public static final String SF_PROJECT_NAME = "pegasusandroid";
+    public static final String SF_PROJECT_ROOT_PATH = "11";
 
     public static final String AB_PAYLOAD_BIN_PATH = "payload.bin";
     public static final String AB_PAYLOAD_PROPERTIES_PATH = "payload_properties.txt";
@@ -43,10 +43,10 @@ public final class Constants {
 
     public static final String PROP_AB_DEVICE = "ro.build.ab_update";
     public static final String PROP_BUILD_DATE = "ro.build.date.utc";
-    public static final String PROP_BUILD_VERSION = "ro.modversion";
-    public static final String PROP_DEVICE = "ro.crdroid.device";
-    public static final String PROP_NEXT_DEVICE = "ro.updater.next_device";
-    public static final String PROP_UPDATER_ALLOW_DOWNGRADING = "crdroid.updater.allow_downgrading";
+    public static final String PROP_BUILD_VERSION = "ro.product.build.version.release";
+    public static final String PROP_DEVICE = "ro.build.product";
+    public static final String PROP_NEXT_DEVICE = "ro.product.product.device";
+    public static final String PROP_UPDATER_ALLOW_DOWNGRADING = "android.updater.allow_downgrading";
 
     public static final String PREF_INSTALL_OLD_TIMESTAMP = "install_old_timestamp";
     public static final String PREF_INSTALL_NEW_TIMESTAMP = "install_new_timestamp";
