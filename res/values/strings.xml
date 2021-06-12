@@ -31,7 +31,7 @@
           {device} - Device name
           {incr} - Incremental version
     -->
-    <string name="updater_server_url" translatable="false">https://raw.githubusercontent.com/PegasusOS/android_packages_apps_Updater_Db/master/{device}/{incr}</string>
+    <string name="updater_server_url" translatable="false">https://github.com/PegasusOS/android_packages_apps_Updater_Db/raw/master/{device}.json</string>
 
     <string name="verification_failed_notification">Verification failed</string>
     <string name="verifying_download_notification">Verifying update</string>
