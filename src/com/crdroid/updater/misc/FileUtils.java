@@ -15,7 +15,7 @@
  */
 package com.crdroid.updater.misc;
 
-import android.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.content.ContentUris;
 import android.content.Context;
 import android.database.Cursor;
