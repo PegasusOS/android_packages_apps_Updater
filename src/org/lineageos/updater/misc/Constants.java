@@ -37,10 +37,10 @@ public final class Constants {
     public static final String UNCRYPT_FILE_EXT = ".uncrypt";
 
     public static final String PROP_BUILD_DATE = "ro.build.date.utc";
-    public static final String PROP_BUILD_VERSION = "ro.lineage.build.version";
+    public static final String PROP_BUILD_VERSION = "ro.build.version.release";
     public static final String PROP_BUILD_VERSION_INCREMENTAL = "ro.build.version.incremental";
-    public static final String PROP_DEVICE = "ro.lineage.device";
-    public static final String PROP_RELEASE_TYPE = "ro.lineage.releasetype";
+    public static final String PROP_DEVICE = "ro.product.device";
+    public static final String PROP_RELEASE_TYPE = "ro.build.type";
 
     public static final String PREF_INSTALL_OLD_TIMESTAMP = "install_old_timestamp";
     public static final String PREF_INSTALL_NEW_TIMESTAMP = "install_new_timestamp";
