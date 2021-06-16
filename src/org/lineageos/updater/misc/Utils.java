@@ -149,14 +149,12 @@ public class Utils {
     }
 
     public static String getServerURL(Context context) {
-        String incrementalVersion = SystemProperties.get(Constants.PROP_BUILD_VERSION_INCREMENTAL);
         String device = SystemProperties.get(Constants.PROP_DEVICE);
         String type = SystemProperties.get(Constants.PROP_RELEASE_TYPE).toLowerCase(Locale.ROOT);
         String serverUrl = context.getString(R.string.updater_server_url);
 
         return serverUrl.replace("{device}", device)
-                .replace("{type}", type)
-                .replace("{incr}", incrementalVersion);
+                .replace("{type}", type);
     }
 
     public static String getUpgradeBlockedURL(Context context) {
